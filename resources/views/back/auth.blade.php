@@ -1,49 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Login</title>
-    <link rel="stylesheet" href="/style-auth.css">
-    
+	<title>Login - SIAKAD</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('themplete/back')}}/dist/img/AdminLTELogo.png">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('themplete_login')}}/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('themplete_login')}}/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('themplete_login')}}/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{{ asset('themplete_login')}}/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('themplete_login')}}/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('themplete_login')}}/css/util.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('themplete_login')}}/css/main.css">
+<!--===============================================================================================-->
 </head>
-
 <body>
-    <div class="container">
-        <div class="login">
-                    {{-- alert error dari controller --}}
-      
-            <form action="" method="post">
-                @csrf
-                <h1>Login</h1>
-                <hr>
-                @if ($errors->any())
-                <div style="background-color: brown; text-align:center; color:white;">
-                    
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                     
-                </div>
-                
-                @endif
-                <p>Selamat Datang Di Halaman Login</p>
-                <label for="">Email</label>
-                <input type="email" name="email" placeholder="example@gmail.com">
-                <label for="">Password</label>
-                <input type="password" name="password" placeholder="Password">
-                <button  name="submit" type="submit">Login</button>
-                <p>
-                    <a href="#">Forgot Password?</a>
-                </p>
-            </form>
-        </div>
-        <div class="right">
-            <img src="https://www.loginradius.com/blog/static/0005ff61c9196311b738904dc2cef6f2/d3746/broken-auth.jpg" alt="">
-        </div>
-    </div>
-</body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="{{ asset('themplete_login')}}/images/img-01.png" alt="IMG">
+				</div>
 
+				<form class="login100-form validate-form" action="" method="post">
+                    @csrf
+                    
+                    @if ($errors->any())
+                    <div style="background-color: brown; text-align:center; color:white;">
+                        
+                            @foreach ($errors->all() as $item)
+                                <li>{{ $item }}</li>
+                            @endforeach
+                         
+                    </div>
+                    
+                    @endif
+					<span class="login100-form-title">
+						Halaman Login
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="email" placeholder="Email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" name="submit" type="submit">
+							Login
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+						 
+					</div>
+
+					<div class="text-center p-t-136">
+						 
+					</div>
+				</form>
+
+ 
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+<!--===============================================================================================-->	
+	<script src="{{ asset('themplete_login')}}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('themplete_login')}}/vendor/bootstrap/js/popper.js"></script>
+	<script src="{{ asset('themplete_login')}}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('themplete_login')}}/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('themplete_login')}}/vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{{ asset('themplete_login')}}/js/main.js"></script>
+
+</body>
 </html>

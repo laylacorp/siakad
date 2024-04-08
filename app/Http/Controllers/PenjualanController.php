@@ -98,7 +98,9 @@ class PenjualanController extends Controller
         ]);
 
         // Hitung total bayar setelah mengubah format input_bayar
-        $totalBayar = str_replace(['.', ','], '', $request->input_bayar);
+        $totalBayar = str_replace(['.', ','], '', $request->total_bayar);
+        $inputBayar = str_replace(['.', ','], '', $request->input_bayar);
+        $kembalian = str_replace(['.', ','], '', $request->kembalian);
 
         // Setelah menyimpan data penjualan, kurangi saldo member jika pembayarannya adalah SALDO
         if ($request->jenis_pembayaran === 'SALDO') {
@@ -132,7 +134,9 @@ class PenjualanController extends Controller
         $penjualan->kode_penjualan = $request->kode_penjualan;
         $penjualan->member_id = $request->member_id;
         $penjualan->nama_member = $request->nama_member;
-        $penjualan->total_bayar = $totalBayar; // Gunakan total bayar yang sudah dihitung
+        $penjualan->total_bayar = $totalBayar; // 
+        $penjualan->input_bayar = $inputBayar; // 
+        $penjualan->kembalian = $kembalian; // 
         $penjualan->jenis_pembayaran = $request->jenis_pembayaran;
         $penjualan->keterangan = $request->keterangan;
         $penjualan->bukti = $imageName; // Simpan nama file bukti

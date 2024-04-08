@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisUjian;
 use App\Models\LogHistori;
+use App\Models\NilaiSiswaDetail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -164,18 +165,27 @@ class JenisUjianController extends Controller
     public function destroy($id)
     {
         $jenis_ujian = JenisUjian::find($id);
-
+        
         if (!$jenis_ujian) {
             return response()->json(['message' => 'Data jenis_ujian not found'], 404);
         }
-
+    
+        // Periksa apakah jenis_ujian masih terkait dengan NilaiSiswaDetail
+        $nilai_siswa_detail = NilaiSiswaDetail::where('jenis_ujian_id', $id)->first();
+        if ($nilai_siswa_detail) {
+            return response()->json(['message' => 'Data tidak dapat dihapus karena masih terkait dengan NilaiSiswaDetail'], 400);
+        }
+        
+        // Lakukan penghapusan jika tidak ada keterkaitan dengan NilaiSiswaDetail
         $jenis_ujian->delete();
-
+    
+        // Simpan log histori jika diperlukan
         $loggedInUserId = Auth::id();
         $this->simpanLogHistori('Delete', 'jenis_ujian', $id, $loggedInUserId, json_encode($jenis_ujian), null);
     
-
         return response()->json(['message' => 'Data Berhasil Dihapus']);
     }
+    
+    
 
 }

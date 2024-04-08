@@ -41,24 +41,7 @@ class WaktuMengajarController extends Controller
     }
 
 
-    public function datatables()
-    {
-        $waktu_mengajar = WaktuMengajar::select(['id', 'jam', 'waktu'])->get();
-        
-        // Tambahkan nomor urut secara manual
-        $nomorUrut = 1;
-        foreach ($waktu_mengajar as $kategori) {
-            $kategori->DT_RowIndex = $nomorUrut++;
-        }
-    
-        return Datatables::of($waktu_mengajar)
-            ->addColumn('action', function ($kategori) {
-                return '<a href="#" class="btn btn-sm btn-warning btn_edit_waktu_mengajar" data-toggle="modal" data-target="#modal-edit-waktu_mengajar" data-id="' . $kategori->id . '" style="color: black"><i class="fas fa-edit"></i> Edit</a>
-                <button class="btn btn-sm btn-danger btn_delete_waktu_mengajar" data-id-kategori="' . $kategori->id . '" style="color: white"><i class="fas fa-trash-alt"></i> Delete</button>';
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-    }
+  
     
     
 

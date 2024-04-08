@@ -37,7 +37,14 @@
   <link rel="stylesheet" href="{{ asset('themplete/back')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="{{ asset('themplete/back')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
-
+  <style>
+    /* CSS untuk menyembunyikan div saat mencetak */
+    @media print {
+        #unhide {
+            display: none;
+        }
+    }
+</style>
  
 
   @stack('css')
@@ -346,12 +353,12 @@
                       <p>Isi Jadwal Pelajaran</p>
                   </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="/tampilkan-jadwal" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Lihat Jadwal Pelajaran</p>
                 </a>
-            </li>
+            </li> --}}
           
           </ul>
         </li> 
@@ -804,36 +811,35 @@
 
         <li class="nav-header">Laporan</li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-file"></i>
-            <p>
-              Master
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="laporan/guru" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Guru</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/UI/general.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Siswa</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/UI/general.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kelas</p>
-              </a>
-            </li>
-          
- 
-          </ul>
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-file"></i>
+                <p>
+                    Master
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('laporan.guru') }}" class="nav-link"> <!-- Menggunakan route() untuk tautan guru -->
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Guru</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('laporan.siswa') }}" class="nav-link"> <!-- Menggunakan route() untuk tautan siswa -->
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Siswa</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('laporan.kelas') }}" class="nav-link"> <!-- Menggunakan route() untuk tautan kelas -->
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Kelas</p>
+                    </a>
+                </li>
+            </ul>
         </li>
+        
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-file"></i>
@@ -844,20 +850,63 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="pages/UI/general.html" class="nav-link">
+              <a href="{{ route('laporan.nilai_siswa') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Siswa</p>
+                <p>Nilai Siswa</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/UI/icons.html" class="nav-link">
+              <a href="/tampilkan-jadwal" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Guru</p>
+                <p>Jadwal Pelajaran</p>
               </a>
             </li>
  
           </ul>
         </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-file"></i>
+            <p>
+              Transaksi
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ route('laporan.keuangan') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Keuangan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/tampilkan-jadwal" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Surat Masuk</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/tampilkan-jadwal" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Surat Keluar</p>
+              </a>
+            </li>
+ 
+          </ul>
+        </li>
+       
+
+        <li class="nav-header">Logout</li>
+        <li class="nav-item">
+          <a href="/logout" class="nav-link">
+            <i class="nav-icon fas fa-undo"></i>
+            <p>
+              Logout
+            </p>
+          </a>
+        </li>
+
+ 
 
 
 
@@ -911,13 +960,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    All Rights Reserved by Layla Techno &copy; {{ date('Y')}}. Designed and Developed by <a
-    href="https://www.ltpresent.com">Layla Techno</a>.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0
-    </div>
-  </footer>
+ 
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -926,6 +969,14 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<footer class="main-footer" id="unhide">
+  All Rights Reserved by Layla Techno &copy; {{ date('Y')}}. Designed and Developed by <a
+  href="https://www.ltpresent.com">Layla Techno</a>.
+  <div class="float-right d-none d-sm-inline-block">
+    <b>Version</b> 1.0
+  </div>
+</footer>
  
 <!-- jQuery -->
 <script src="{{ asset('themplete/back')}}/plugins/jquery/jquery.min.js"></script>

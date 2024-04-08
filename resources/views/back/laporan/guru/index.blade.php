@@ -16,15 +16,21 @@
             <div class="card-body">
 
               <form action="">
-                  <label for="tanggal_awal">Tanggal Masuk Awal:</label>
-                  <input type="date" class="form-control" id="tanggal_awal" name="start_date" value="{{ $filterStartDate }}">
-                  <br>
-                  <label for="tanggal_akhir">Tanggal Masuk Akhir:</label>
-                  <input type="date" class="form-control" id="tanggal_akhir" name="end_date" value="{{ $filterEndDate }}">
-
-                  <br>
-                  {{-- <button class="btn btn-sm btn-primary" onclick="filterData()"> <i class="fas fa-search"></i> Filter Berdasarkan Range</button> --}}
-                  <button class="btn btn-sm btn-primary"> <i class="fas fa-search"></i> Filter Berdasarkan Range</button>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="tanggal_awal">Tanggal Masuk Awal:</label>
+                        <input type="date" class="form-control" id="tanggal_awal" name="start_date" value="{{ $filterStartDate }}">
+                        <!-- Let's move the button here -->
+                        <button class="btn btn-sm btn-primary mt-3"><i class="fas fa-search"></i> Filter Berdasarkan Range</button>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="tanggal_akhir">Tanggal Masuk Akhir:</label>
+                        <input type="date" class="form-control" id="tanggal_akhir" name="end_date" value="{{ $filterEndDate }}">
+                    </div>
+                    <!-- Remove the third column -->
+                </div>
+                
+                
               </form>
                 <br><br>
                 <table id="example1" class="table table-bordered table-striped">

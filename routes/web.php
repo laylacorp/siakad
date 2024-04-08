@@ -74,7 +74,9 @@ use App\Models\Penjualan;
 
 
 // Home
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::post('/', [AuthController::class, 'authenticate']);
+
 // MASTER
 Route::resource('tahunajaran', TahunAjaranController::class)->middleware('auth');
 Route::resource('guru', GuruController::class)->middleware('auth');
@@ -365,3 +367,7 @@ Route::get('/assets', [GaleriController::class, 'assets']);
 // LAPORAN
 
 Route::get('laporan/guru', [LaporanController::class, 'guru'])->middleware('auth')->name('laporan.guru');
+Route::get('laporan/siswa', [LaporanController::class, 'siswa'])->middleware('auth')->name('laporan.siswa');
+Route::get('laporan/kelas', [LaporanController::class, 'kelas'])->middleware('auth')->name('laporan.kelas');
+Route::get('laporan/nilai_siswa', [LaporanController::class, 'nilai_siswa'])->middleware('auth')->name('laporan.nilai_siswa');
+Route::get('laporan/keuangan', [LaporanController::class, 'keuangan'])->middleware('auth')->name('laporan.keuangan');
